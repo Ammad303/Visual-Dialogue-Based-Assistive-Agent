@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Visual CHATBOT</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        #chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 20px;
+            margin-top: 50px;
+        }
+
+        #chat-log {
+            height: 300px;
+            width: 100%;
+            overflow-y: scroll;
+            border: 2px solid #ccc;
+            padding: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 16px;
+        }
+
+        #send-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #send-btn:hover {
+            background-color: #0056b3;
+        }
+
+        p {
+            margin: 0;
+            padding: 5px;
+        }
+
+        .user-message {
+            background-color: #e6f2ff;
+        }
+
+        .bot-message {
+            background-color: #f2f2f2;
+        }
+
+        .bot-message:before {
+            content: "Bot:";
+            font-weight: bold;
+            color: #333;
+        }
+
+        .user-message:before {
+            content: "You:";
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Visual Chatbot</h1>
+
+    <div id="chat-container">
+        <div id="chat-log"></div>
+        <input id="user-input" type="text" placeholder="Type your message...">
+        <button id="send-btn">Send</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Function to display chatbot response
+        function displayResponse(response) {
+            var chatLog = document.getElementById("chat-log");
+            var chatEntry = document.createElement("p");
+            chatEntry.innerText = response;
+            chatEntry.classList.add("bot-message");
+            chatLog.appendChild(chatEntry);
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }
+
+        // Event listener for send button click
+        $("#send-btn").click(function() {
+            var userInput = $("#user-input").val().trim();
+            if (userInput !== "") {
+                var chatLog = document.getElementById("chat-log");
+                var chatEntry = document.createElement("p");
+                chatEntry.innerText = userInput;
+                chatEntry.classList.add("user-message");
+                chatLog.appendChild(chatEntry);
+                chatLog.scrollTop = chatLog.scrollHeight;
+                $("#user-input").val(""); // Clear user input
+
+                // Send user input to Flask route for chatbot response
+                $.ajax({
+                    url: "/chat",
+                    method: "POST",
+                    data: JSON.stringify({ input: userInput }),
+                    contentType: "application/json",
+                    success: function(response) {
+                        displayResponse(response.response);
+                    }
+                });
+            }
+        });
+
+        // Event listener for Enter key press in input field
+        $("#user-input").keypress(function(event) {
+            if (event.which === 13) { // Enter key
+                $("#send-btn").click(); // Trigger send button click event
+            }
+        });
+    </script>
+</body>
+</html>

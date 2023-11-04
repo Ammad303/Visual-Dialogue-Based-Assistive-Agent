@@ -6,7 +6,8 @@ Software used In this Project:
 1. Pycharm
 2. Thonny
 3. Arduino UNO
-   Hardware:
+   
+Hardware:
    1. 4WD Car Kit
    2. ESP32-CAM
    3. ESP-32

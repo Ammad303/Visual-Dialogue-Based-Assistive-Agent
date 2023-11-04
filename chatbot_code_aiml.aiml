@@ -1,0 +1,239 @@
+<aiml>
+
+        <!-- Greetings -->
+        <category>
+            <pattern>HELLO</pattern>
+            <template>
+                Hi! How are you doing?
+                <random>
+                    <li>What is your name?</li>
+                    <li>How can I help you?</li>
+                </random>
+            </template>
+        </category>
+
+        <category>
+            <pattern>I AM DOING GOOD</pattern>
+            <template>Good to hear! How can I help you?</template>
+        </category>
+
+        <category>
+            <pattern>HI</pattern>
+            <template><srai>HELLO</srai></template>
+        </category>
+
+        <category>
+            <pattern>HEY</pattern>
+            <template>
+                Hey there! How can I assist you today?
+            </template>
+        </category>
+
+        <category>
+            <pattern>WHAT IS YOUR NAME</pattern>
+            <template>
+                <random>
+                    <li>My name is visual chatbot.</li>
+                    <li>You can call me visual chatbot.</li>
+                    <li>I am a visual chatbot.</li>
+                </random>
+            </template>
+        </category>
+
+        <category>
+            <pattern>MY NAME IS *</pattern>
+            <template>
+                <think><set name="myname"><star /></set></think>
+                Nice to meet you! <get name="myname" />
+            </template>
+        </category>
+
+        <category>
+            <pattern>WHAT IS MY NAME</pattern>
+            <template>Your name is <get name="username" /></template>
+        </category>
+
+        <category>
+            <pattern>HOW ARE YOU</pattern>
+            <template>
+                <random>
+                    <li>I am doing well, thank you for asking.</li>
+                    <li>I am doing great.</li>
+                    <li>I am all well.</li>
+                </random>
+            </template>
+        </category>
+
+        <category>
+            <pattern>WHAT IS MY NAME AGAIN</pattern>
+            <template>
+                Your name is <get name="myname" />. How can I help you?
+            </template>
+        </category>
+
+        <category>
+            <pattern>THANK YOU</pattern>
+            <template>
+                You're welcome! If you have any more questions, feel free to ask.
+            </template>
+        </category>
+
+        <category>
+            <pattern>BYE</pattern>
+            <template>Bye <get name="myname" />! See you again...</template>
+        </category>
+
+        <category>
+            <pattern>* HELP</pattern>
+            <template>
+                Sure! I'm here to help. You can ask me about objects, give me directions, or just say hello.
+            </template>
+        </category>
+
+
+        <!-- Vehicle Control -->
+        <category>
+            <pattern>_ MOVE _ *</pattern>
+            <template>
+                <think><set name="command"><star index="3" /></set></think>
+                <srai><star index="3" /></srai>
+            </template>
+        </category>
+
+       <category>
+  <pattern>MOVE THE VEHICLE *</pattern>
+  <template>
+    <think><set name="command"><star /></set></think>
+    <srai><star /></srai>
+  </template>
+</category>
+  <category>
+            <pattern>MOVE *</pattern>
+            <template>
+                <think><set name="command"><star /></set></think>
+                <srai><star /></srai>
+            </template>
+        </category>
+
+        <category>
+            <pattern>TURN *</pattern>
+            <template>
+                <think><set name="command"><star /></set></think>
+                <srai><star /></srai>
+            </template>
+        </category>
+        <category>
+            <pattern>_ TURN _ * SIDE</pattern>
+            <template>
+                <think><set name="command"><star index="3" /></set></think>
+                <srai><star index="3" /></srai>
+            </template>
+        </category>
+        <category>
+         <pattern>TURN _ *</pattern>
+            <template>
+            <think><set name="command"><star Index="2"/></set></think>
+                <srai><star index="2"/></srai>
+             </template>
+        </category>
+
+
+        <category>
+            <pattern>STOP THE VEHICLE</pattern>
+            <template>
+                <think><set name="command">stop</set></think>
+                <srai>STOP</srai>
+            </template>
+        </category>
+
+        <category>
+    <pattern>LEFT</pattern>
+    <template><random>
+    <li>moving left.</li>
+    <li>turning left.</li>
+    <li>okay! going left.</li>
+    </random></template>
+ </category>
+
+ <category>
+    <pattern>RIGHT</pattern>
+    <template><random>
+    <li>moving right.</li>
+    <li>turning right.</li>
+    <li>okay! going right.</li>
+    </random></template>
+ </category>
+
+<category>
+    <pattern>FORWARD</pattern>
+    <template><random>
+    <li>moving forward.</li>
+    <li>going forward.</li>
+    <li>okay! going forward.</li>
+    </random></template>
+ </category>
+
+ <category>
+    <pattern>BACKWARD</pattern>
+    <template><random>
+    <li>going reverse.</li>
+    <li>moving backward.</li>
+    <li>okay! moving backward.</li>
+    </random></template>
+ </category>
+
+<category>
+    <pattern>STOP</pattern>
+    <template>
+        <think><set name="command">STOP</set></think>
+        Stopping the car.
+    </template>
+</category>
+
+
+
+        <!-- Object Detection -->
+        <category>
+            <pattern>WHAT DO YOU SEE AROUND ME</pattern>
+            <template>There is <get name="object" /> around you.</template>
+        </category>
+
+        <category>
+            <pattern>DESCRIBE MY SURROUNDINGS</pattern>
+            <template>There is <get name="object" /> in front of you.</template>
+        </category>
+
+        <category>
+            <pattern>ARE THERE ANY OBSTACLES IN FRONT OF ME</pattern>
+            <template>There is <get name="object" /> in front of you.</template>
+        </category>
+
+        <category>
+            <pattern>WHERE IS MY VEHICLE</pattern>
+            <template>Currently, I am not able to tell you the location.</template>
+        </category>
+
+        <category>
+            <pattern>WHAT IS IN FRONT OF YOU</pattern>
+            <template>There is <get name="object" /> in front of me.</template>
+        </category>
+
+        <category>
+            <pattern>WHAT IS ON YOUR * </pattern>
+            <template>
+                <think><set name="command"><star /></set></think>
+                There is <get name="object" /> on my <star />
+            </template>
+        </category>
+
+        <category>
+            <pattern>WHAT YOU CAN SEE</pattern>
+            <template><srai>WHAT IS IN FRONT OF YOU</srai></template>
+        </category>
+
+    <!-- Default Category -->
+        <category>
+            <pattern>*</pattern>
+            <template>Sorry, I am unable to understand this query.</template>
+        </category>
+</aiml>
